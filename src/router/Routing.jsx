@@ -5,7 +5,7 @@ import Register from "../components/user/Register";
 
 import Feed from "../components/publication/Feed";
 import PrivateLayout from "../components/layout/private/PrivateLayout";
-
+import NotFound from "../components/404/NotFound";
 
 const Routing = () => {
   return (
@@ -23,6 +23,7 @@ const Routing = () => {
           <Route index element={<Feed />} />
           <Route path="feed" element={<Feed />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
