@@ -8,6 +8,8 @@ import PrivateLayout from "../components/layout/private/PrivateLayout";
 import NotFound from "../components/404/NotFound";
 import AuthProvider from "../context/AuthProvider";
 import LogOut from "../components/user/LogOut";
+import Gente from "../components/user/Gente";
+import Editar_Usuario from "../components/user/Editar_Usuario";
 
 const Routing = () => {
   return (
@@ -26,6 +28,8 @@ const Routing = () => {
             <Route index element={<Feed />} />
             <Route path="feed" element={<Feed />} />
             <Route path="logout" element={<LogOut />} />
+            <Route path="gente" element={<Gente />} />
+            <Route path="editar" element={<Editar_Usuario />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
