@@ -6,25 +6,28 @@ import Register from "../components/user/Register";
 import Feed from "../components/publication/Feed";
 import PrivateLayout from "../components/layout/private/PrivateLayout";
 import NotFound from "../components/404/NotFound";
+import AuthProvider from "../context/AuthProvider";
 
 const Routing = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        {/* Enlaces Publicos */}
-        <Route path="/" element={<Public_Layout />}>
-          <Route index element={<Login />} />
-          <Route path="login" element={<Login />} />
-          <Route path="registro" element={<Register />} />
-        </Route>
+      <AuthProvider>
+        <Routes>
+          {/* Enlaces Publicos */}
+          <Route path="/" element={<Public_Layout />}>
+            <Route index element={<Login />} />
+            <Route path="login" element={<Login />} />
+            <Route path="registro" element={<Register />} />
+          </Route>
 
-        {/* Enlaces Privados */}
-        <Route path="/social" element={<PrivateLayout />}>
-          <Route index element={<Feed />} />
-          <Route path="feed" element={<Feed />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          {/* Enlaces Privados */}
+          <Route path="/social" element={<PrivateLayout />}>
+            <Route index element={<Feed />} />
+            <Route path="feed" element={<Feed />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 };
