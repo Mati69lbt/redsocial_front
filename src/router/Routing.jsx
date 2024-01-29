@@ -7,6 +7,7 @@ import Feed from "../components/publication/Feed";
 import PrivateLayout from "../components/layout/private/PrivateLayout";
 import NotFound from "../components/404/NotFound";
 import AuthProvider from "../context/AuthProvider";
+import LogOut from "../components/user/LogOut";
 
 const Routing = () => {
   return (
@@ -24,6 +25,7 @@ const Routing = () => {
           <Route path="/social" element={<PrivateLayout />}>
             <Route index element={<Feed />} />
             <Route path="feed" element={<Feed />} />
+            <Route path="logout" element={<LogOut />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

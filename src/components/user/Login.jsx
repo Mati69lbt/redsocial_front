@@ -2,36 +2,50 @@ import { useState } from "react";
 import { Global } from "../../helpers/Global";
 import useForm from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
   const { form, changed } = useForm();
   const [logueado, setLogueado] = useState("sin loguear");
+
+  const { setAuth } = useAuth();
 
   const navigate = useNavigate();
 
   const loginUser = async (e) => {
     e.preventDefault();
     let usuario_logueado = form;
+    try {
+      // Hacer peticion al backend
+      console.log(Global.url_backend + "user/login");
+      const request = await fetch(Global.url_backend + "user/login", {
+        method: "POST",
+        body: JSON.stringify(usuario_logueado),
+        headers: { "Content-Type": "application/json" },
+      });
 
-    // Hacer peticion al backend
-    const request = await fetch(Global.url_backend + "user/login", {
-      method: "POST",
-      body: JSON.stringify(usuario_logueado),
-      headers: { "Content-Type": "application/json" },
-    });
+      const data = await request.json();
 
-    const data = await request.json();
+      if (data.status == "success") {
+        // Guadar los datos en el LocalStorage
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        setLogueado("exito");
 
-    if (data.status == "success") {
-      // Guadar los datos en el LocalStorage
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      setLogueado("exito");
-    } else {
+        // Guardar los datos en el context
+        setAuth(data.user);
+        // Redireccionar a la pagina principal
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } else {
+        setLogueado("error");
+      }
+    } catch (error) {
+      console.error("Error durante la autenticación:", error);
       setLogueado("error");
     }
   };
-
   return (
     <>
       <header className="content__header content__header--public">
@@ -65,14 +79,7 @@ const Login = () => {
             <input type="password" name="password" onChange={changed} />
           </div>
 
-          <input
-            type="submit"
-            value="Ingresar"
-            className="btn btn-success"
-            onClick={() => {
-              navigate("/social");
-            }}
-          />
+          <input type="submit" value="Ingresar" className="btn btn-success" />
         </form>
       </div>
     </>

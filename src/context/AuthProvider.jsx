@@ -1,6 +1,5 @@
 import { useState, useEffect, createContext } from "react";
 import { Global } from "../helpers/Global";
-import { flushSync } from "react-dom";
 
 export const AuthContext = createContext();
 
@@ -14,12 +13,13 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const authUser = async () => {
-    // Sacar Datos del usuario identificado en el localsotrage
+    // Sacar Datos del usuario identificado en el localstorage
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
 
     // Comprobar si hay token y user
     if (!token || !user) {
+      setLoading(false);
       return false;
     }
     // Transformar los datos a un objeto de javascript

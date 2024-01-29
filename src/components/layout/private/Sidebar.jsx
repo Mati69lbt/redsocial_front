@@ -3,8 +3,10 @@ import { Global } from "../../../helpers/Global";
 import useAuth from "../../../hooks/useAuth";
 const Sidebar = () => {
   const { auth, contadores } = useAuth();
+  
+  const { publicaciones, seguidores, siguiendo } = contadores;
 
-  const { publicaciones, seguidores, seguiendo } = contadores;
+  const url_img = Global.url_backend + "user/avatar/" + auth.image;
 
   return (
     <aside className="layout__aside">
@@ -18,7 +20,7 @@ const Sidebar = () => {
             <div className="general-info__container-avatar">
               {auth.image != "default.png" && (
                 <img
-                  src={Global.url_backend + "user/avatar/auth.image"}
+                  src={url_img}
                   className="container-avatar__img"
                   alt="Foto de perfil"
                 />
@@ -44,7 +46,7 @@ const Sidebar = () => {
             <div className="stats__following">
               <a href="#" className="following__link">
                 <span className="following__title">Siguiendo</span>
-                <span className="following__number">{seguiendo}</span>
+                <span className="following__number">{siguiendo}</span>
               </a>
             </div>
             <div className="stats__following">

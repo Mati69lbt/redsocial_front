@@ -29,5 +29,3 @@ const PrivateLayout = () => {
 };
 
 export default PrivateLayout;
-
-// src\components\layout\private\PrivateLayout.jsx
