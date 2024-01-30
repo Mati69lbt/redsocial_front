@@ -11,7 +11,7 @@ const Editar_Usuario = () => {
 
   const url_img = Global.url_backend + "user/avatar/" + auth.image;
 
-  // Crea una constante de toke y agarra el token del localStorage
+  // Crea una constante del token y agarra el token del localStorage
   const token = localStorage.getItem("token");
 
   const updateUser = async (e) => {
@@ -35,8 +35,7 @@ const Editar_Usuario = () => {
         delete data.user.password;
         setAuth(data.user);
         setGuardado("guardado");
-        console.log("data", data);
-        console.log("auth", auth);
+     
       } else {
         setGuardado("error");
       }
@@ -46,6 +45,8 @@ const Editar_Usuario = () => {
         // recoger imagen a subir
         const formData = new FormData();
         formData.append("file0", fileInput.files[0]);
+
+        // Peticion para guardar la imagen subida en el servidor
         const uploadRequest = await fetch(Global.url_backend + "user/upload", {
           method: "POST",
           body: formData,
@@ -53,8 +54,9 @@ const Editar_Usuario = () => {
             Authorization: token,
           },
         });
+
         const uploadData = await uploadRequest.json();
-        console.log("uploadData", uploadData);
+        
         if (uploadData.status === "success" && uploadData) {
           delete uploadData.user.password;
           setAuth(uploadData.user);
