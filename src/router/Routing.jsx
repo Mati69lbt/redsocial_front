@@ -12,6 +12,7 @@ import Gente from "../components/user/Gente";
 import Editar_Usuario from "../components/user/Editar_Usuario";
 import Siguiendo from "../components/follow/Siguiendo";
 import Seguidor from "../components/follow/Seguidor";
+import Profile from "../components/user/Profile";
 
 const Routing = () => {
   return (
@@ -34,6 +35,7 @@ const Routing = () => {
             <Route path="editar" element={<Editar_Usuario />} />
             <Route path="siguiendo/:userId" element={<Siguiendo />} />
             <Route path="seguidores/:userId" element={<Seguidor />} />
+            <Route path="perfil/:userId" element={<Profile />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

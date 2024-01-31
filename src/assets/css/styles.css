@@ -448,6 +448,8 @@ button {
   background: #5cb85c;
   border: 1px solid #0c8e0c;
   color: white;
+  width: 60%;
+  text-align: center;
 }
 
 .alert-danger {

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Global } from "../../helpers/Global";
 import { useParams } from "react-router-dom";
 import UserList from "../user/UserList";
+import getProfile from "../../helpers/getProfile";
 
 const Seguidor = () => {
   const [users, setUsers] = useState([]);
@@ -9,14 +10,18 @@ const Seguidor = () => {
   const [total, setTotal] = useState(0);
   const [loadingGente, setLoadingGente] = useState(true);
   const [following, setFollowing] = useState([]);
+  const [userProfile, setUserProfile] = useState({});
+
+  const { nick } = userProfile;
 
   const params = useParams();
 
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     getUsers();
+    getProfile(params.userId, setUserProfile, token);
   }, []);
-
-  const token = localStorage.getItem("token");
 
   const getUsers = async (nextPage = 1) => {
     setLoadingGente(true);
@@ -38,7 +43,7 @@ const Seguidor = () => {
       );
 
       const data = await request.json();
-      
+
       // Recorrer y Limpiar follows para quedarme con followed
       let cleanUsers = [];
       data.resultados.docs.forEach((follow) => {
@@ -71,7 +76,7 @@ const Seguidor = () => {
   return (
     <>
       <header className="content__header">
-        <h1 className="content__title">Followers</h1>
+        <h1 className="content__title">{nick}'s Follower</h1>
       </header>
 
       <UserList
