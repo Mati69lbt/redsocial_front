@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
 import { Global } from "../../helpers/Global";
-import UserList from "./UserList";
+import { useParams } from "react-router-dom";
+import UserList from "../user/UserList";
 
-const Gente = () => {
+const Seguidor = () => {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [loadingGente, setLoadingGente] = useState(true);
   const [following, setFollowing] = useState([]);
+
+  const params = useParams();
 
   useEffect(() => {
     getUsers();
@@ -17,10 +20,14 @@ const Gente = () => {
 
   const getUsers = async (nextPage = 1) => {
     setLoadingGente(true);
+
+    // Sacar userId de la url
+    const userId = params.userId;
+
     try {
       // Peticion para traer Usuarios
       const request = await fetch(
-        Global.url_backend + "user/list/" + nextPage,
+        Global.url_backend + "follower/followers/" + userId + "/" + nextPage,
         {
           method: "GET",
           headers: {
@@ -32,13 +39,20 @@ const Gente = () => {
 
       const data = await request.json();
       
-      setTotal(data.total_de_paginas);
+      // Recorrer y Limpiar follows para quedarme con followed
+      let cleanUsers = [];
+      data.resultados.docs.forEach((follow) => {
+        cleanUsers = [...cleanUsers, follow.user];
+      });
+      data.users = cleanUsers;
+
+      setTotal(data.totalPages);
 
       // Crear estado para poder listarlos
       if (data.status == "success" && data.users) {
         let newUsers = data.users;
         if (users.length >= 1) {
-          newUsers = [...users, ...newUsers];
+          newUsers = [...users, ...data.users];
         }
         setUsers(newUsers);
         setFollowing(data.siguiendo);
@@ -57,7 +71,7 @@ const Gente = () => {
   return (
     <>
       <header className="content__header">
-        <h1 className="content__title">Comunidad</h1>
+        <h1 className="content__title">Followers</h1>
       </header>
 
       <UserList
@@ -70,10 +84,8 @@ const Gente = () => {
         total={total}
         nextPage={nextPage}
       />
-
-      <br />
     </>
   );
 };
 
-export default Gente;
+export default Seguidor;

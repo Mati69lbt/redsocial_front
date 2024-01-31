@@ -10,6 +10,8 @@ import AuthProvider from "../context/AuthProvider";
 import LogOut from "../components/user/LogOut";
 import Gente from "../components/user/Gente";
 import Editar_Usuario from "../components/user/Editar_Usuario";
+import Siguiendo from "../components/follow/Siguiendo";
+import Seguidor from "../components/follow/Seguidor";
 
 const Routing = () => {
   return (
@@ -30,6 +32,8 @@ const Routing = () => {
             <Route path="logout" element={<LogOut />} />
             <Route path="gente" element={<Gente />} />
             <Route path="editar" element={<Editar_Usuario />} />
+            <Route path="siguiendo/:userId" element={<Siguiendo />} />
+            <Route path="seguidores/:userId" element={<Seguidor />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

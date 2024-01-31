@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 import avatar from "../../../assets/img/user.png";
 import { Global } from "../../../helpers/Global";
 import useAuth from "../../../hooks/useAuth";
 const Sidebar = () => {
   const { auth, contadores } = useAuth();
-  
+
   const { publicaciones, seguidores, siguiendo } = contadores;
 
   const url_img = Global.url_backend + "user/avatar/" + auth.image;
@@ -35,7 +36,7 @@ const Sidebar = () => {
             </div>
 
             <div className="general-info__container-names">
-              <a href="#" className="container-names__name">
+              <a to="" className="container-names__name">
                 {auth.name} {auth.surname}
               </a>
               <p className="container-names__nickname">{auth.nick}</p>
@@ -44,20 +45,20 @@ const Sidebar = () => {
 
           <div className="profile-info__stats">
             <div className="stats__following">
-              <a href="#" className="following__link">
+              <Link to={"Siguiendo/" + auth._id} className="following__link">
                 <span className="following__title">Siguiendo</span>
                 <span className="following__number">{siguiendo}</span>
-              </a>
+              </Link>
             </div>
             <div className="stats__following">
-              <a href="#" className="following__link">
+              <Link to={"seguidores/" + auth._id} className="following__link">
                 <span className="following__title">Seguidores</span>
                 <span className="following__number">{seguidores}</span>
-              </a>
+              </Link>
             </div>
 
             <div className="stats__following">
-              <a href="#" className="following__link">
+              <a to="" className="following__link">
                 <span className="following__title">Publicaciones</span>
                 <span className="following__number">{publicaciones}</span>
               </a>
