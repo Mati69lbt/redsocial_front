@@ -15,6 +15,8 @@ const getProfile = async (userId, setUserProfile, token) => {
     if (data.status == "success") {
       setUserProfile(data.user);
     }
+
+    return data;
   } catch (error) {
     console.log(error);
   }
