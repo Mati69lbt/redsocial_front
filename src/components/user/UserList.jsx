@@ -2,6 +2,7 @@ import useAuth from "../../hooks/useAuth";
 import avatar from "../../assets/img/user.png";
 import { Global } from "../../helpers/Global";
 import { Link } from "react-router-dom";
+import ReactTimeAgo from "react-time-ago";
 
 const UserList = ({
   users,
@@ -46,9 +47,9 @@ const UserList = ({
         Global.url_backend + "follower/unfollow/" + id,
         {
           method: "DELETE",
-          "Content-Type": "application/json",
           body: JSON.stringify({ followed: id }),
           headers: {
+            "Content-Type": "application/json",
             Authorization: token,
           },
         }
@@ -105,7 +106,12 @@ const UserList = ({
                     </Link>
                     <span className="user-info__divider"> | </span>
                     <a href="#" className="user-info__create-date">
-                      {user.created_at}
+                      <ReactTimeAgo
+                        date={new Date(user.created_at).getTime()}
+                        locale="es-Es"
+                      >
+                        {user.created_at}
+                      </ReactTimeAgo>
                     </a>
                   </div>
 
@@ -128,7 +134,10 @@ const UserList = ({
                     <button
                       className="post__button "
                       onClick={() => {
-                        unFollow(user._id);
+                        const confirmunFollow = window.confirm(
+                          `¿Queres dejar de seguir a ${user.name}?`
+                        );
+                        confirmunFollow && unFollow(user._id);
                       }}
                     >
                       Dejar de Seguir

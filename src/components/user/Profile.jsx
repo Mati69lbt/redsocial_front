@@ -4,6 +4,7 @@ import getProfile from "../../helpers/getProfile";
 import { Link, useParams } from "react-router-dom";
 import { Global } from "../../helpers/Global";
 import useAuth from "../../hooks/useAuth";
+import PublicationList from "../publication/PublicationList";
 
 const Profile = () => {
   const [user, setUser] = useState({});
@@ -147,11 +148,7 @@ const Profile = () => {
       console.log("error", error);
     }
   };
-  const sigPage = () => {
-    let next = page + 1;
-    setPage(next);
-    getPublications(next);
-  };
+
   return (
     <>
       <header className="aside__profile-info">
@@ -229,68 +226,13 @@ const Profile = () => {
         </div>
       </header>
 
-      <div className="content__posts">
-        {publications.map((publication) => {
-          return (
-            <article className="posts__post" key={publication._id}>
-              <div className="post__container">
-                <div className="post__image-user">
-                  <Link
-                    to={"/social/perfil/" + publication.user._id}
-                    className="post__image-link"
-                  >
-                    {publication.user.image != "default.png" ? (
-                      <img
-                        src={
-                          Global.url_backend +
-                          "user/avatar/" +
-                          publication.user.image
-                        }
-                        className="container-avatar__img"
-                        alt="Foto de perfil"
-                      />
-                    ) : (
-                      <img
-                        src={avatar}
-                        className="container-avatar__img"
-                        alt="Foto de perfil"
-                      />
-                    )}
-                  </Link>
-                </div>
-
-                <div className="post__body">
-                  <div className="post__user-info">
-                    <a href="#" className="user-info__name">
-                      {publication.user.name} {publication.user.surname}
-                    </a>
-                    <span className="user-info__divider"> | </span>
-                    <a href="#" className="user-info__create-date">
-                      {publication.created_at}
-                    </a>
-                  </div>
-
-                  <h4 className="post__content">{publication.text}</h4>
-                </div>
-              </div>
-              {auth._id == publication.user._id && (
-                <div className="post__buttons">
-                  <a href="#" className="post__button">
-                    <i className="fa-solid fa-trash-can"></i>
-                  </a>
-                </div>
-              )}
-            </article>
-          );
-        })}
-      </div>
-      {page < total && (
-        <div className="content__container-btn">
-          <button className="content__btn-more-post" onClick={sigPage}>
-            Ver mas publicaciones
-          </button>
-        </div>
-      )}
+      <PublicationList
+        publications={publications}
+        page={page}
+        setPage={setPage}
+        total={total}
+        getPublications={getPublications}
+      />
     </>
   );
 };

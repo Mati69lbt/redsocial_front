@@ -186,9 +186,9 @@ body {
   border-color: var(--color-border-btn-success-hover);
 }
 
-.content__posts {
+/* .content__posts {
   width: 100%;
-}
+} */
 
 .posts__post {
   width: 100%;
@@ -207,8 +207,8 @@ body {
 }
 
 .post__image-user {
-  width: 7.5rem;
-  height: 7.5rem;
+  width: 15rem;
+  height: 15rem;
   border-radius: 100rem;
   margin-right: 1.5rem;
   overflow: hidden;
@@ -236,7 +236,7 @@ body {
   margin: 1rem 0;
   font-size: 1.8rem;
   font-weight: 500;
-  width: 750px;
+  width: 500px;
 }
 
 .post__buttons {
@@ -308,15 +308,16 @@ body {
 }
 
 .general-info__container-avatar {
-  width: 7.5rem;
-  height: 7.5rem;
+  width: 14.5rem;
+  height: 14.5rem;
   border-radius: 100rem;
   margin-right: 1.5rem;
   overflow: hidden;
 }
 
 .container-avatar__img {
-  height: 100%;
+  width: auto;
+  height: auto;
 }
 
 .container-names__name {
@@ -465,4 +466,8 @@ button {
 .prueba {
   width: 70%;
   height: auto;
+}
+
+.post__body {
+  width: 80%;
 }
