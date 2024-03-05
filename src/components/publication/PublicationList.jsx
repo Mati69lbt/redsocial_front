@@ -13,8 +13,6 @@ const PublicationList = ({
 }) => {
   const { auth } = useAuth();
 
-  console.log(publications.created_at);
-
   const borrarPublicacion = async (id) => {
     try {
       const request = await fetch(
@@ -102,7 +100,7 @@ const PublicationList = ({
                         "publication/imagen/" +
                         publication.file
                       }
-                      style={{ width: "75%", height: "auto" }}
+                      className="post__image"
                       alt="Publicación"
                     />
                   )}

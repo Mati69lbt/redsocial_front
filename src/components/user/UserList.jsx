@@ -40,6 +40,7 @@ const UserList = ({
       console.log("error", error);
     }
   };
+  
   const unFollow = async (id) => {
     try {
       // Hacer peticion al backend para borrar el follow

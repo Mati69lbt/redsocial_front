@@ -12,7 +12,7 @@ const Siguiendo = () => {
   const [following, setFollowing] = useState([]);
   const [userProfile, setUserProfile] = useState({});
 
-  const { nick } = userProfile;  
+  const { nick } = userProfile;
 
   const params = useParams();
 
@@ -21,7 +21,6 @@ const Siguiendo = () => {
     getUsers();
     getProfile(params.userId, setUserProfile, token);
   }, []);
-
 
   const getUsers = async (nextPage = 1) => {
     setLoadingGente(true);
@@ -47,8 +46,15 @@ const Siguiendo = () => {
       // Recorrer y Limpiar follows para quedarme con followed
       let cleanUsers = [];
       data.resultados.docs.forEach((follow) => {
-        cleanUsers = [...cleanUsers, follow.followed];
+        console.log(follow);
+        const esta = cleanUsers.some((user) => user._id === follow.user._id);
+        if (!esta) {
+          cleanUsers = [...cleanUsers, follow.followed];
+        }
       });
+
+      data.users = cleanUsers;
+
       data.users = cleanUsers;
 
       setTotal(data.totalPages);

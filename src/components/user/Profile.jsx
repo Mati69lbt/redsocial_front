@@ -204,7 +204,9 @@ const Profile = () => {
               className="following__link"
             >
               <span className="following__title">Siguiendo</span>
-              <span className="following__number">{siguiendo}</span>
+              <span className="following__number">
+                {siguiendo ? siguiendo : 0}
+              </span>
             </Link>
           </div>
           <div className="stats__following">
@@ -213,14 +215,18 @@ const Profile = () => {
               className="following__link"
             >
               <span className="following__title">Seguidores</span>
-              <span className="following__number">{seguidores}</span>
+              <span className="following__number">
+                {seguidores ? seguidores : 0}
+              </span>
             </Link>
           </div>
 
           <div className="stats__following">
             <a href="#" className="following__link">
               <span className="following__title">Publicaciones</span>
-              <span className="following__number">{publicaciones}</span>
+              <span className="following__number">
+                {publicaciones ? publicaciones : 0}
+              </span>
             </a>
           </div>
         </div>

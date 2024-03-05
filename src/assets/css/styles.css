@@ -239,6 +239,11 @@ body {
   width: 500px;
 }
 
+.post__image {
+  width: 75%;
+  height: auto;
+}
+
 .post__buttons {
   display: flex;
   align-items: center;

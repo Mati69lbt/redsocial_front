@@ -44,12 +44,22 @@ const Seguidor = () => {
 
       const data = await request.json();
 
-      // Recorrer y Limpiar follows para quedarme con followed
-      let cleanUsers = [];
+      let set_seguidor = new Set();
+
       data.resultados.docs.forEach((follow) => {
-        cleanUsers = [...cleanUsers, follow.user];
+        set_seguidor.add(follow.user);
       });
-      data.users = cleanUsers;
+
+      let array_seguidores = [...set_seguidor];
+
+      data.users = array_seguidores;
+
+      // // Recorrer y Limpiar follows para quedarme con followed
+      // let cleanUsers = [];
+      // data.resultados.docs.forEach((follow) => {
+      //   cleanUsers = [...cleanUsers, follow.user];
+      // });
+      // data.users = cleanUsers;
 
       setTotal(data.totalPages);
 
