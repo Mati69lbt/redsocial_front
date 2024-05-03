@@ -165,6 +165,13 @@ body {
   margin-right: 1rem;
 }
 
+.inicio_logueado {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
 .content__button {
   background-color: var(--color-background-btn-success);
   color: var(--color-text-navbar);
