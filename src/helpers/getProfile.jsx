@@ -10,6 +10,8 @@ const getProfile = async (userId, setUserProfile, token) => {
       },
     });
 
+    
+
     const data = await request.json();
 
     if (data.status == "success") {
