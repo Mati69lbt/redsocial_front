@@ -86,6 +86,9 @@ const Login = () => {
         </div>
         <div>
           <img src={verificado} alt="veri" />
+          <h1 style={{ textAlign: "center" }} className="logh1">
+            RSocial
+          </h1>
         </div>
       </div>
     </>

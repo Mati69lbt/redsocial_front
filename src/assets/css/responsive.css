@@ -98,6 +98,14 @@
 }
 
 @media (max-width: 480px) {
+  .inicio_logueado {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .logh1 {
+    margin-bottom: 5rem;
+  }
   .layout {
     width: 100%;
     min-width: auto;

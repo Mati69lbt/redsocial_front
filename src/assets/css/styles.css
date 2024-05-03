@@ -170,6 +170,7 @@ body {
   justify-content: space-evenly;
   flex-wrap: wrap;
   align-items: flex-start;
+  flex-direction: row-reverse;
 }
 
 .content__button {
